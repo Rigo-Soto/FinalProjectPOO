@@ -1,14 +1,15 @@
 
 #include "Movie.h"
+#include "Videos.h"
 
     // Constructor Default
     Movie::Movie(){
         movieName = "Default Name";
         movieRating = 0;
     }
-
+ 
     // Parameter Constructor
-    Movie::Movie(string _movieName, int _movieRating){
+    Movie::Movie (string _type, int _ID, string _movieName, int _duration, string _genre, double _movieRating):Videos(_type,_ID,_movieName,_duration,_genre,_movieRating){
         movieName = _movieName;
         movieRating = _movieRating;
     }
@@ -19,6 +20,6 @@
     }
 
     // Other Methods
-    Movie::string str(){
-        return "Movie Name: " + movieName + "\nMovie Rating: " + to_string(movieRating);
+    void Movie::str(){
+        cout << "Im a Movie" << endl;
     }

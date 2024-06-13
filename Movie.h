@@ -1,9 +1,13 @@
+#pragma once
+
 #include <stdio.h>
 #include <iostream>
 #include <string>
+
+#include "Videos.h"
 using namespace std;
 
-    class Movie{
+    class Movie : public Videos {
 
     // Private
 private:
@@ -16,11 +20,12 @@ public:
     Movie();
 
     // Constructor con parámetros
-    Movie(string _movieName, int _movieRating);
+    Movie(string _type, int _ID, string _name, int _duration, string _genre, double _score);
 
     // Destructor
     ~Movie();
 
     // Other Methods
-    string str();
-    };
+    void str();
+
+};

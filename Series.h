@@ -1,15 +1,19 @@
+#pragma once
 
 #include <iostream>
+#include <vector>
+#include <string>
+
 #include "Episodes.h"
 
 using namespace std;
 
-class Series:public Episodes{
+class Series : public Episodes{
 
     // Private
 private:
     string serieName;
-    array<Episodes, 2> episodes;
+    vector<Episodes *> episodes;
 
     // Public
 public:
@@ -17,18 +21,24 @@ public:
     Series();
 
     // Parameter Constructor
-    Series(string _serieName, array<Episodes, 10> _episodes);
+    Series(string, vector<Episodes *>);
 
     // Destructor
     ~Series();
 
     // GETS
     string getSerieName();
+    
 
     // SETS
     void setSerieName(string _serieName);
+    void setEpisodes(vector<Episodes *>);
+
 
     // Other Methods
-    string str();
+    void showEpisodes();
+    void str();
+    void addEpisode(Episodes *);
+
 
 };

@@ -1,9 +1,12 @@
+#pragma once
+
+#include "Videos.h"
 
 #include <iostream>
 
 using namespace std;
 
-class Episodes{
+class Episodes : public Videos{
     // Private
 private:
     string serieName;
@@ -16,7 +19,7 @@ public:
     Episodes();
 
     // Parameter Constructor
-    Episodes(string _serieName, int _season, int _episodeNumber);
+    Episodes(string type, int ID, string _name, int _duration, string _genre, double _score, string _serie_name, int _season, int _episode_number);
 
     // Destructor
     ~Episodes();
@@ -32,6 +35,6 @@ public:
     void setEpisodeNumber(int _episodeNumber);
 
     // Other Methods
-    string str();
+    void str();
 
 };

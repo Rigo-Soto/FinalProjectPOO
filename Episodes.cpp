@@ -1,5 +1,8 @@
 
 #include "Episodes.h"
+#include "Videos.h"
+
+#include <iostream>
 
     // Constructor Default
     Episodes::Episodes(){
@@ -9,10 +12,10 @@
     }
 
     // Parameter Constructor
-    Episodes::Episodes(string _serieName, int _season, int _episodeNumber){
-        serieName = _serieName;
+    Episodes::Episodes(string type, int ID, string _name, int _duration, string _genre, double _score, string _serie_name, int _season, int _episode_number):Videos(type,ID,_name,_duration,_genre,_score){
+        serieName = _serie_name;
         season = _season;
-        episodeNumber = _episodeNumber;
+        episodeNumber = _episode_number;
     }
 
     // Destructor
@@ -47,6 +50,6 @@
     }
 
     // Other Methods
-    string Episodes::str(){
-        return "Serie Name: " + serieName + "\nSeason: " + to_string(season) + "\nEpisode Number: " + to_string(episodeNumber);
+    void Episodes::str(){
+        cout << "Im an Episode" << endl;
     }

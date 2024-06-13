@@ -75,8 +75,3 @@
     void Videos::setScore(int _score){
         score = _score;
     }
-
-    // Other Methods
-    string Videos::str(){
-        return type + ',' + to_string(ID) + ',' + name + ',' + to_string(duration) + ',' + genre + ',' + to_string(score);
-    }

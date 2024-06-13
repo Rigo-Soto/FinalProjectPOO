@@ -1,3 +1,4 @@
+#pragma once
 
 #include <iostream>
 
@@ -41,5 +42,5 @@ public:
     void setScore(int _score);
 
     // Other Methods
-    string str();
+    virtual void str() = 0;
 };
