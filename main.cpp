@@ -347,9 +347,9 @@ void vidsearch(string loadedfile,string name,double rate ) {
     //Open the file
     ifstream f(loadedfile);
     string textLine;
-
     if (!f.is_open()) {
         cout << "Error opening file! Default file engaged" << endl;
+        return;
     }
 
     //Variables to store the information of the media
@@ -363,7 +363,7 @@ void vidsearch(string loadedfile,string name,double rate ) {
     int episodeNumber;
     int season;
 
-    getline(f, textLine);
+
 
     do {
         //Read Line
@@ -371,13 +371,11 @@ void vidsearch(string loadedfile,string name,double rate ) {
         cout << textLine;
         //If the media is an episode
         if (typeofMedia == "e") {
-                f >> ID >> name >> genre >> duration >> score;
                 Episodes *e = new Episodes(typeofMedia, ID, name, duration, genre, score, serieName, season, episodeNumber);
                 episodes.push_back(e);
         }
             //If the media is a movie
         else {
-            f >> ID >> name >> genre >> duration >> score;
             Movie *p = new Movie(typeofMedia, ID, name, duration, genre, score);
             movies.push_back(p);
         }
@@ -390,7 +388,8 @@ void vidsearch(string loadedfile,string name,double rate ) {
         vector<Movie *> movie_search;
 
         bool test3_1 = false;
-        int definer;
+        int definer = 0;
+
         for (Episodes *episode: episodes) {
 
             if (episode->getName() == name) {
@@ -404,9 +403,6 @@ void vidsearch(string loadedfile,string name,double rate ) {
         for (Movie *movie: movies){
             if (movie->getName() == name) {
                 test3_1 = true;
-                ID=movie->getID();
-                genre=movie->getGenre();
-                duration=movie->getDuration();
                 definer=2;
                 movie->setScore(rate);
                 movie_search.push_back(movie);
@@ -434,6 +430,13 @@ void vidsearch(string loadedfile,string name,double rate ) {
         if (!test3_1) {
             cout << "Video not found" << endl << endl;
         }
+    }
+    // Clean up dynamically allocated memory
+    for (Movie *movie: movies) {
+        delete movie;
+    }
+    for (Episodes *episode: episodes) {
+        delete episode;
     }
 }
 void showrating(string loadedfile,string name){
