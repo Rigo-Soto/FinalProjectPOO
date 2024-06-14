@@ -76,7 +76,7 @@ void videosFromRating(string loadedFile, double ratingVideos) {
     }
 
         if (test2_1 = true){
-        cout << "They arent movies with rating of "<< ratingVideos << endl;
+        cout << "They arent movies with rating of "<< ratingVideos << " :(" << endl;
         cout << endl;
         }
     
@@ -102,7 +102,7 @@ void videosFromRating(string loadedFile, double ratingVideos) {
         }        
     }
         if (test2_2 = true){
-        cout<<"They arent episodes with rating of "<< ratingVideos << endl;
+        cout<<"They arent episodes with rating of "<< ratingVideos << " :(" << endl;
         cout<<endl;
     }
 };
@@ -173,7 +173,7 @@ void videosFromGenre(string loadedFile, string genreVideos) {
     }
 
         if (test2_2 = true){
-        cout << "They arent movies with genre of "<< genreVideos << endl;
+        cout << "They arent movies with genre of "<< genreVideos << " :(" << endl;
         cout << endl;
         }
     
@@ -199,7 +199,7 @@ void videosFromGenre(string loadedFile, string genreVideos) {
     }
 
         if (test2_3 = true){
-        cout<<"They arent episodes with genre of "<< genreVideos << endl;
+        cout<<"They arent episodes with genre of "<< genreVideos << " :(" << endl;
         cout<<endl;
         
     }
@@ -269,27 +269,73 @@ void episodesOfSerieWithRanking(string loadedFile, string serieName, double rank
 
 
     if(!test3_1){
-        cout << "They arent episodes with rank of " << ranking << " for that serie" << endl << endl; 
+        cout << "They arent episodes with rank of " << ranking << " for that serie :(" << endl << endl; 
+    }
+};
+
+//Function for 4
+void moviesOfRanking(string loadedFile, double ranking){
+
+    //Create the vectors to store the movies and episodes
+    vector<Movie *> movies;
+    vector<Episodes *> episodes;
+
+    //Open the file
+    ifstream f(loadedFile);
+    string textLine;
+
+    //Variables to store the information of the media
+    string typeofMedia;
+    int ID;
+    string name;
+    string genre;
+    int duration;
+    double score;
+    string serieName;
+    int episodeNumber;
+    int season;
+        
+    getline(f, textLine);
+
+    do{
+        //Read Line
+        f >> typeofMedia >> ID >> name >> genre >> duration >> score;
+
+
+        //If the media is an episode
+        if (typeofMedia == "e") {
+            f >> serieName >> episodeNumber >> season;
+            Episodes *e = new Episodes(typeofMedia, ID, name, duration, genre, score, serieName, season, episodeNumber);
+            episodes.push_back(e);
+        }
+        
+        //If the media is a movie
+        else{
+            Movie *p = new Movie(typeofMedia, ID, name, duration, genre, score);
+            movies.push_back(p);
+        }
+
+    }while (!f.eof());
+
+    cout << "Movies: " << endl << endl;
+
+    bool test4_1 = false;
+    
+    for(Movie *movie: movies){
+        if(movie -> getScore() == ranking){
+            test4_1 = true;
+
+            cout << "ID: " << movie -> getID() << endl;
+            cout << "Movie Name: " << movie -> getName() << endl;
+            cout << "Genre: " << movie -> getGenre() << endl;
+            cout << "Duration: " << movie -> getDuration() << endl;
+            cout << "Score: " << movie -> getScore() << endl << endl;
+        }
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    if(!test4_1){
+        cout << "They arent any movies with " << ranking << " of ranking :(" << endl << endl;
+    }
 };
 
 
@@ -298,12 +344,8 @@ void episodesOfSerieWithRanking(string loadedFile, string serieName, double rank
 
 
 
-
-
-
-
 int main() {
-
+    
     int optionChoosed;
 
     // Case 1 Variables
@@ -318,120 +360,137 @@ int main() {
     double desiredRating3;
 
     // Case 4 Variables
+    double desiredRating4;
     
     // Case 5 Variables
 
+        while(true){
 
-       
+            loadedFile = "TestCase.txt";
 
-        loadedFile = "TestCase.txt";
+            cout << "------------------------------------------------------------------------" << endl;
+            cout << "Welcome to the Movie and Series App" << endl << endl;
 
-
-        cout << "------------------------------------------------------------------------" << endl;
-        cout << "Welcome to the Movie and Series App" << endl << endl;
-
-        cout << "Menu:" << endl;
-        cout << "1. Load data file" << endl;
-        cout << "2. Show the videos with a specific rating or from a specific genre" << endl;
-        cout << "3. Show the episodes of a specific series with a specific rating" << endl;
-        cout << "4. Show the movies with a specific rating" << endl;
-        cout << "5. Rate a Video" << endl;
-        cout << "6. Exit" << endl << endl;
-        cout << "------------------------------------------------------------------------" << endl;
+            cout << "Menu:" << endl;
+            cout << "1. Load data file" << endl;
+            cout << "2. Show the videos with a specific rating or from a specific genre" << endl;
+            cout << "3. Show the episodes of a specific series with a specific rating" << endl;
+            cout << "4. Show the movies with a specific rating" << endl;
+            cout << "5. Rate a Video" << endl;
+            cout << "6. Exit" << endl << endl;
+            cout << "------------------------------------------------------------------------" << endl;
 
 
-        cout << "To continue, please choose an option from the menu: ";
-        cin >> optionChoosed;
-        cout << endl;
+            cout << "To continue, please choose an option from the menu: ";
+            cin >> optionChoosed;
+            cout << endl;
 
-        switch (optionChoosed) {
+            switch (optionChoosed) {
 
-            // CASE 1 - Load data file
-            case 1:
-                cout << "To continue, please write the name of the file you want to load (Default: TestCase.txt)" << endl;
-                cin >> loadedFile;
+                // CASE 1 - Load data file
+                case 1:
+                    cout << "To continue, please write the name of the file you want to load (Default: TestCase.txt)" << endl;
+                    cin >> loadedFile;
 
-                if (loadedFile.find(".txt") != string::npos) {
-                    cout << "The file was loaded successfully" << endl;
-                } else {
-                    cout << "The file could not be loaded" << endl;
-                    cout << "The default file will be loaded" << endl;
+                    if (loadedFile.find(".txt") != string::npos) {
+                        cout << "The file was loaded successfully" << endl;
+                    } else {
+                        cout << "The file could not be loaded" << endl;
+                        cout << "The default file will be loaded" << endl;
 
-                    loadedFile = "TestCase.txt";
-                    cout << endl;
-                }
+                        loadedFile = "TestCase.txt";
+                        cout << endl;
+                    }
 
-                break;
+                    break;
 
 
-            // CASE 2. Show the videos with a specific rating or from a specific genre
-            case 2:
+                // CASE 2. Show the videos with a specific rating or from a specific genre
+                case 2:
 
-                cout << "1. Show the videos with a specific rating" << endl;
-                cout << "2. Show the videos from a specific genre" << endl << endl;
+                    cout << "1. Show the videos with a specific rating" << endl;
+                    cout << "2. Show the videos from a specific genre" << endl << endl;
 
-                cout << "Choose an option: ";
-                cin >> option2Choosed;
+                    cout << "Choose an option: ";
+                    cin >> option2Choosed;
 
-                if (option2Choosed == 1) {
+                    switch (option2Choosed){
+
+                        case 1:
+                            cout << "Please write the rating you want to search: ";
+                            double desiredRating2;
+                            cin >> desiredRating2;
+
+                            cout << endl << endl << "The videos with the rating " << desiredRating2 << " are: " << endl << endl;
+
+                            //Swow the videos with the rating
+                            videosFromRating(loadedFile, desiredRating2);
+
+                            break;
+                        
+                        case 2:
+                            cout << "Please write the genre you want to search: ";
+                            cin >> desiredGenre2;
+
+                            cout << endl << endl << "The videos from the genre " << desiredGenre2 << " are: " << endl << endl;
+
+                            //Show the videos from the genre
+                            videosFromGenre(loadedFile, desiredGenre2);
+
+                            break;
+
+                        default:
+                            cout << "Invalid option" << endl;
+
+                            break;
+                    }
+                    
+                    break;
+
+                // CASE 3. Show the episodes of a specific series with a specific rating
+                case 3:
+                    cout << "Please write the name of the series you want to search: ";
+                    cin >> desiredSerie3;
+
                     cout << "Please write the rating you want to search: ";
-                    double desiredRating2;
-                    cin >> desiredRating2;
+                    cin >> desiredRating3;
 
-                    cout << endl << endl << "The videos with the rating " << desiredRating2 << " are: " << endl << endl;
+                    cout << endl << endl << "The episodes of the series " << desiredSerie3 << " with the rating " << desiredRating3 << " are loading..." << endl << endl;
 
-                    //Swow the videos with the rating
-                    videosFromRating(loadedFile, desiredRating2);
+                    //Show the episodes of the series with the rating
+                    episodesOfSerieWithRanking(loadedFile, desiredSerie3, desiredRating3);
 
-                } 
-                else if (option2Choosed == 2) {
-                    cout << "Please write the genre you want to search: ";
-                    cin >> desiredGenre2;
+                    break;
 
-                    cout << endl << endl << "The videos from the genre " << desiredGenre2 << " are: " << endl << endl;
+                // CASE 4. Show the movies with a specific rating
+                case 4:
+                    cout << "Please write the rating you want to search in movies: ";
+                    cin >> desiredRating4;
 
-                    //Show the videos from the genre
-                    videosFromGenre(loadedFile, desiredGenre2);
+                    cout << endl << endl << "The movies founded with rating of " << desiredRating4 << " are loading..."  << endl << endl;
 
-                } 
-                else {
-                    cout << "Invalid option" << endl;
-                }
-                
-                break;
+                    //Show the movies with the desired rating
+                    moviesOfRanking(loadedFile, desiredRating4);
 
-            // CASE 3. Show the episodes of a specific series with a specific rating
-            case 3:
-                cout << "Please write the name of the series you want to search: ";
-                cin >> desiredSerie3;
+                    break;
 
-                cout << "Please write the rating you want to search: ";
-                cin >> desiredRating3;
+                case 5:
+                cout << "PENDIENTEE" << endl;
 
-                cout << endl << endl << "The episodes of the series " << desiredSerie3 << " with the rating " << desiredRating3 << " are loading..." << endl << endl;
+                    break;
 
-                //Show the episodes of the series with the rating
-                episodesOfSerieWithRanking(loadedFile, desiredSerie3, desiredRating3);
+                case 6:
+                    cout << "You are leaving, Thanks :)" << endl << endl;
 
-                break;
+                    return 0;
 
+                default:
+                    cout << "Invalid option, please try again" << endl;
 
-
-
-
-
-
-
-            
-                
-            default:
-                cout << "Invalid option, please try again" << endl;
-
-                cout << endl;
-                
+                    cout << endl;
+            }        
         }
 
-    
-
     return 0;
+
 }
