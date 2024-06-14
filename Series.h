@@ -40,5 +40,7 @@ public:
     void str();
     void addEpisode(Episodes *);
 
+    Series &operator+(Episodes *e);
+
 
 };

@@ -52,6 +52,11 @@ void Series::addEpisode(Episodes *episode){
     episodes.push_back(episode);
 }
 
-    void Series:: str(){
-        cout << "Im a Serie" << endl;
-    }
+void Series:: str(){
+    cout << "Im a Serie" << endl;
+}
+
+Series &Series::operator+(Episodes *e){
+    addEpisode(e);
+    return *this;
+}
