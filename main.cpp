@@ -363,6 +363,8 @@ int main() {
     double desiredRating4;
     
     // Case 5 Variables
+    int option5Choosed;
+
 
         while(true){
 
@@ -474,8 +476,19 @@ int main() {
 
                     break;
 
+                // CASE 5. Rate a Video or Ask For the Rating
                 case 5:
-                cout << "PENDIENTEE" << endl;
+
+                cout << "1. Ask for the title to rate" << endl;
+                cout << "2. Ask for the rating" << endl << endl;
+
+                cout << "Choose an option: ";
+                cin >> option5Choosed;
+
+                switch (option5Choosed){
+                    
+                    // Pendant
+                }
 
                     break;
 
