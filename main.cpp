@@ -351,6 +351,7 @@ void vidsearch(string loadedfile,string name,double rate ) {
         cout << "Error opening file! Default file engaged" << endl;
         return;
     }
+    getline(f, textLine);
 
     //Variables to store the information of the media
     string typeofMedia;
