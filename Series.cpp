@@ -3,7 +3,7 @@
 
     // Constructor Default
     Series::Series(){
-        serieName = "Default Serie Name";
+        serieName = "We didnt find a Serie with that Name";
         episodes = {};
     }
 
@@ -15,7 +15,6 @@
 
     // Destructor
     Series::~Series(){
-        cout << "Object Destroyed" << endl;
     }
 
     // GETS
@@ -36,14 +35,14 @@
 
     void Series::showEpisodes(){
     
-    cout<<"Episodios:"<<endl;
+    cout<<"Episodes:"<<endl;
     cout<<endl;
 
 
     for(int i=0; i<episodes.size(); i++){
-        cout<<"Nombre de la serie: "<<episodes[i]->getSerieName()<<endl;
-        cout<<"Temporada: "<<episodes[i]->getSeason()<<endl;
-        cout<<"Numero de episodio: "<<episodes[i]->getEpisodeNumber()<<endl;
+        cout<<"Name of the Serie: "<<episodes[i]->getSerieName()<<endl;
+        cout<<"Season of the Episode: "<<episodes[i]->getSeason()<<endl;
+        cout<<"Number of Episode: "<<episodes[i]->getEpisodeNumber()<<endl;
         cout<<endl;
     }
     

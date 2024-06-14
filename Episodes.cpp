@@ -6,7 +6,7 @@
 
     // Constructor Default
     Episodes::Episodes(){
-        serieName = "Default Serie Name";
+        serieName = "We didnt find a Serie with that Name";
         season = 0;
         episodeNumber = 0;
     }
@@ -20,7 +20,6 @@
 
     // Destructor
     Episodes::~Episodes(){
-        cout << "Object Destroyed" << endl;
     }
 
     // GETS
