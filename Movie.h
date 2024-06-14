@@ -26,6 +26,6 @@ public:
     ~Movie();
 
     // Other Methods
-    void str();
+    void str() override;
 
 };

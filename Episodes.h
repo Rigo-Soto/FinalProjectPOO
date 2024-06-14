@@ -35,6 +35,6 @@ public:
     void setEpisodeNumber(int _episodeNumber);
 
     // Other Methods
-    void str();
+    void str() override;
 
 };
