@@ -6,7 +6,7 @@
 
     // Constructor Default
     Episodes::Episodes(){
-        serieName = "We didnt find a Serie with that Name";
+        serieName = "We didnt find a serie with that name";
         season = 0;
         episodeNumber = 0;
     }

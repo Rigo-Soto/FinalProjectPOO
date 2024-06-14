@@ -3,7 +3,7 @@
 
     // Constructor Default
     Series::Series(){
-        serieName = "We didnt find a Serie with that Name";
+        serieName = "We didnt find a serie with that name";
         episodes = {};
     }
 

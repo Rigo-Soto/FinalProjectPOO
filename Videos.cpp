@@ -5,7 +5,7 @@
     Videos::Videos(){
         type = "Default Type";
         ID = 0;
-        name = "Default Name";
+        name = "We didnt find a Serie with that name";
         duration = 0;
         genre = "Default Genre";
         score = 0.0;
@@ -23,7 +23,6 @@
 
     // Destructor
     Videos::~Videos(){
-        cout << "Object Destroyed" << endl;
     }
 
     // GETS

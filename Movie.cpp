@@ -4,7 +4,7 @@
 
     // Constructor Default
     Movie::Movie(){
-        movieName = "Default Name";
+        movieName = "";
         movieRating = 0;
     }
  
@@ -16,7 +16,6 @@
 
     // Destructor
     Movie::~Movie(){
-        cout << "Object Destroyed" << endl;
     }
 
     // Other Methods

@@ -258,16 +258,18 @@ void episodesOfSerieWithRanking(string loadedFile, string serieName, double rank
         if(episode -> getSerieName() == serieName && episode -> getScore() == ranking){
             test3_1 = true;
             episodes_serie.push_back(episode);
+
+
         }
     }
 
     Series serie(serieName, episodes_serie);
-
     cout << "Name of the Serie: " << serie.getName() << endl << endl;
     serie.showEpisodes();
 
-    if(test3_1 = false){
-        cout << "They arent episodes with rank of " << ranking << "of the Serie " << serieName << endl << endl; 
+
+    if(!test3_1){
+        cout << "They arent episodes with rank of " << ranking << " for that serie" << endl << endl; 
     }
 
 
@@ -406,7 +408,7 @@ int main() {
                 cout << "Please write the rating you want to search: ";
                 cin >> desiredRating3;
 
-                cout << endl << endl << "The episodes of the series " << desiredSerie3 << " with the rating " << desiredRating3 << " are loading" << endl << endl;
+                cout << endl << endl << "The episodes of the series " << desiredSerie3 << " with the rating " << desiredRating3 << " are loading..." << endl << endl;
 
                 //Show the episodes of the series with the rating
                 episodesOfSerieWithRanking(loadedFile, desiredSerie3, desiredRating3);
