@@ -19,27 +19,27 @@ public:
     // Constructor Default
     Videos();
 
-    // Constructor con parámetros
+    // Constructor with parameters
     Videos(string _type, int _ID, string _name, int _duration, string _genre, double _score);
 
     // Destructor
     ~Videos();
 
     // GETS
-    string getType();
-    int getID();
-    string getName();
-    int getDuration();
-    string getGenre();
-    double getScore();
+    virtual string getType();
+    virtual int getID();
+    virtual string getName();
+    virtual int getDuration();
+    virtual string getGenre();
+    virtual double getScore();
 
     // SETS
-    void setType(string _type);
-    void setID(int _ID);
-    void setName(string _name);
-    void setDuration(int _duration);
-    void setGenre(string _genre);
-    void setScore(int _score);
+    virtual void setType(string _type);
+    virtual void setID(int _ID);
+    virtual void setName(string _name);
+    virtual void setDuration(int _duration);
+    virtual void setGenre(string _genre);
+    virtual void setScore(int _score);
 
     // Other Methods
     virtual void str() = 0;

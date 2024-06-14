@@ -76,7 +76,7 @@ void videosFromRating(string loadedFile, double ratingVideos) {
     }
 
         if (test2_1 = true){
-        cout << "They arent movies with rating of "<< ratingVideos << " :(" << endl;
+        cout << "There arent movies with rating of "<< ratingVideos << " :(" << endl;
         cout << endl;
         }
     
@@ -102,7 +102,7 @@ void videosFromRating(string loadedFile, double ratingVideos) {
         }        
     }
         if (test2_2 = true){
-        cout<<"They arent episodes with rating of "<< ratingVideos << " :(" << endl;
+        cout<<"There arent episodes with rating of "<< ratingVideos << " :(" << endl;
         cout<<endl;
     }
 };
@@ -173,7 +173,7 @@ void videosFromGenre(string loadedFile, string genreVideos) {
     }
 
         if (test2_2 = true){
-        cout << "They arent movies with genre of "<< genreVideos << " :(" << endl;
+        cout << "There arent movies with genre of "<< genreVideos << " :(" << endl;
         cout << endl;
         }
     
@@ -199,7 +199,7 @@ void videosFromGenre(string loadedFile, string genreVideos) {
     }
 
         if (test2_3 = true){
-        cout<<"They arent episodes with genre of "<< genreVideos << " :(" << endl;
+        cout<<"There arent episodes with genre of "<< genreVideos << " :(" << endl;
         cout<<endl;
         
     }
@@ -269,7 +269,7 @@ void episodesOfSerieWithRanking(string loadedFile, string serieName, double rank
 
 
     if(!test3_1){
-        cout << "They arent episodes with rank of " << ranking << " for that serie :(" << endl << endl; 
+        cout << "There arent episodes with rank of " << ranking << " for that serie :(" << endl << endl; 
     }
 };
 
@@ -334,7 +334,7 @@ void moviesOfRanking(string loadedFile, double ranking){
     }
 
     if(!test4_1){
-        cout << "They arent any movies with " << ranking << " of ranking :(" << endl << endl;
+        cout << "There arent any movies with " << ranking << " of ranking :(" << endl << endl;
     }
 };
 
