@@ -338,7 +338,7 @@ void moviesOfRanking(string loadedFile, double ranking){
     }
 };
 
-void vidsearch(string loadedfile,string name,double rate ) {
+void vidsearch(string loadedfile,string Sname,double rate ) {
     // Create the vectors to store the movies and episodes
     vector<Movie *> movies;
     vector<Episodes *> episodes;
@@ -357,6 +357,7 @@ void vidsearch(string loadedfile,string name,double rate ) {
     int duration;
     double score;
     string serieName;
+    string name;
     int episodeNumber;
     int season;
 
@@ -382,7 +383,7 @@ void vidsearch(string loadedfile,string name,double rate ) {
 
     // Search in episodes
     for (Episodes *episode: episodes) {
-        if (episode->getName() == name) {
+        if (episode->getName() == Sname) {
             found = true;
             definer = 1;
             episode->setScore(rate);
@@ -392,7 +393,7 @@ void vidsearch(string loadedfile,string name,double rate ) {
 
     // Search in movies
     for (Movie *movie: movies) {
-        if (movie->getName() == name) {
+        if (movie->getName() == Sname) {
             found = true;
             definer = 2;
             movie->setScore(rate);
@@ -432,7 +433,7 @@ void vidsearch(string loadedfile,string name,double rate ) {
     }
 }
 
-void showrating(string loadedfile,string name){
+void showrating(string loadedfile,string Sname){
     //Create the vectors to store the movies and episodes
     vector<Movie *> movies;
     vector<Episodes *> episodes;
@@ -449,6 +450,7 @@ void showrating(string loadedfile,string name){
     string typeofMedia;
     int ID;
     string serieName;
+    string name;
     string genre;
     int duration;
     double score;
@@ -456,7 +458,6 @@ void showrating(string loadedfile,string name){
     int episodeNumber;
     int season;
 
-    getline(f, textLine);
 
     do {
         //Read Line
@@ -464,13 +465,11 @@ void showrating(string loadedfile,string name){
         cout << textLine;
         //If the media is an episode
         if (typeofMedia == "e") {
-            f >> ID >> name >> genre >> duration >> score;
             Episodes *e = new Episodes(typeofMedia, ID, name, duration, genre, score, serieName, season, episodeNumber);
             episodes.push_back(e);
         }
             //If the media is a movie
         else {
-            f >> ID >> name >> genre >> duration >> score;
             Movie *p = new Movie(typeofMedia, ID, name, duration, genre, score);
             movies.push_back(p);
         }
@@ -486,7 +485,7 @@ void showrating(string loadedfile,string name){
         int definer;
         for (Episodes *episode: episodes) {
 
-            if (episode->getName() == name) {
+            if (episode->getName() == Sname) {
                 test3_1 = true;
                 definer=1;
                 episode->getScore();
@@ -495,7 +494,7 @@ void showrating(string loadedfile,string name){
             }
         }
         for (Movie *movie: movies){
-            if (movie->getName() == name) {
+            if (movie->getName() == Sname) {
                 test3_1 = true;
                 ID=movie->getID();
                 genre=movie->getGenre();
