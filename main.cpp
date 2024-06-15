@@ -664,34 +664,36 @@ int main() {
                     break;
 
                 // CASE 5. Rate a Video or Ask For the Rating
-                int des;
-                double calification;
-                cout << "Would you like to rate a video (1) or view the rating of a video (2)" << endl;
-                try {
-                    cin >> des;
-                    if (des == 1) {
-                        string nameoR;
-                        cout << "Which video would you like to rate? " << endl;
-                        cin >> nameoR;
-                        cout << "How much would you rate it?" << endl;
-                        cin >> calification;
-                        vidsearch(loadedFile, nameoR, calification);
-                        exit(1);
-                    } else if (des == 2) {
-                        string interest;
-                        cout<<"Which video would yuo like to display its rating?"<<endl;
-                        cin>>interest;
-                        showrating(loadedFile,interest);
-
-                    } else {
-                        throw ("Error");
+                case 5:
+                    int des;
+                    double calification;
+                    cout << "Would you like to rate a video? (1)"<<endl;
+                    cout<< "Would you like to view the rating of a video? (2)" << endl;
+                    try {
+                        cin >> des;
+                        if (des == 1) {
+                            string nameoR;
+                            cout << "Which video would you like to rate? " << endl;
+                            cin >> nameoR;
+                            cout << "How much would you rate it?" << endl;
+                            cin >> calification;
+                            vidsearch(loadedFile, nameoR, calification);
+                            exit(1);
+                        } else if (des == 2) {
+                            string interest;
+                            cout<<"Which video would yuo like to display its rating?"<<endl;
+                            cin>>interest;
+                            showrating(loadedFile,interest);
+    
+                        } else {
+                            throw ("Error");
+                        }
                     }
-                }
-                catch (...) {
-                    cout << "Invalid option, just 1 or 2 allowed" << endl;
-                    exit(1);
-                }
-                break;
+                    catch (...) {
+                        cout << "Invalid option, just 1 or 2 allowed" << endl;
+                        exit(1);
+                    }
+                    break;
 
                 case 6:
                     cout << "You are leaving, Thanks :)" << endl << endl;
