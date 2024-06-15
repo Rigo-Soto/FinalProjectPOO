@@ -338,196 +338,192 @@ void moviesOfRanking(string loadedFile, double ranking){
     }
 };
 
-void vidsearch(string loadedfile,string Sname,double rate ) {
-    // Create the vectors to store the movies and episodes
-    vector<Movie *> movies;
-    vector<Episodes *> episodes;
+void vidsearch( string loadedfile ,string Sname,double rate ) {
+        // Create the vectors to store the movies and episodes
+        vector<Movie *> movies;
+        vector<Episodes *> episodes;
 
-    // Open the file
-    ifstream f(loadedfile);
-    if (!f.is_open()) {
-        cout << "Error opening file! Default file engaged" << endl;
-        return;
-    }
-
-    // Variables to store the information of the media
-    string typeofMedia;
-    int ID;
-    string genre;
-    int duration;
-    double score;
-    string serieName;
-    string name;
-    int episodeNumber;
-    int season;
-
-    while (f >> typeofMedia >> ID >> name >> genre >> duration >> score) {
-        // If the media is an episode
-        if (typeofMedia == "e") {
-            f >> serieName >> season >> episodeNumber;
-            Episodes *e = new Episodes(typeofMedia, ID, name, duration, genre, score, serieName, season, episodeNumber);
-            episodes.push_back(e);
+        // Open the file
+        ifstream f(loadedfile);
+        if (!f.is_open()) {
+            cout << "Error opening file!!!" << endl;
+            return;
         }
-        // If the media is a movie
-        else if (typeofMedia == "m") {
-            Movie *p = new Movie(typeofMedia, ID, name, duration, genre, score);
-            movies.push_back(p);
-        }
-    }
+        string text_line;
+         getline(f,text_line);
 
-    vector<Episodes *> episodes_search;
-    vector<Movie *> movie_search;
+        string typeofMedia;
+        int ID;
+        string genre;
+        int duration;
+        double score;
+        string serieName;
+        string name;
+        int episodeNumber;
+        int season;
 
-    bool found = false;
-    int definer = 0;
+        while (f >> typeofMedia >> ID >> name >> genre >> duration >> score) {
 
-    // Search in episodes
-    for (Episodes *episode: episodes) {
-        if (episode->getName() == Sname) {
-            found = true;
-            definer = 1;
-            episode->setScore(rate);
-            episodes_search.push_back(episode);
-        }
-    }
-
-    // Search in movies
-    for (Movie *movie: movies) {
-        if (movie->getName() == Sname) {
-            found = true;
-            definer = 2;
-            movie->setScore(rate);
-            movie_search.push_back(movie);
-        }
-    }
-
-    switch (definer) {
-        case 1: {
-            Series serie(name, episodes_search); // Use 'name' as the series name
-            cout << "Name of the Series: " << serie.getName() << endl;
-            cout << "The score is now: " << rate << endl;
-            serie.showEpisodes();
-            break;
-        }
-
-        case 2: {
-            if (!movie_search.empty()) {
-                Movie *Themovie = movie_search.front(); // Assuming you want the first movie that matches
-                cout << "Name of the Movie: " << Themovie->getName() << endl;
-                cout << "The score is now: " << Themovie->getScore() << endl;
+            if (typeofMedia == "e") {
+                f >> serieName >> season >> episodeNumber;
+                Episodes *e = new Episodes(typeofMedia, ID, name, duration, genre, score, serieName, season, episodeNumber);
+                episodes.push_back(e);
             }
-            break;
+            else{
+                Movie *p = new Movie(typeofMedia, ID, name, duration, genre, score);
+                movies.push_back(p);
+            }
         }
-    }
-
-    if (!found) {
-        cout << "Video not found" << endl << endl;
-    }
-
-    // Clean up dynamically allocated memory
-    for (Movie *movie: movies) {
-        delete movie;
-    }
-    for (Episodes *episode: episodes) {
-        delete episode;
-    }
-}
-
-void showrating(string loadedfile,string Sname){
-    //Create the vectors to store the movies and episodes
-    vector<Movie *> movies;
-    vector<Episodes *> episodes;
-
-    //Open the file
-    ifstream f(loadedfile);
-    string textLine;
-
-    if (!f.is_open()) {
-        cout << "Error opening file! Default file engaged" << endl;
-    }
-
-    //Variables to store the information of the media
-    string typeofMedia;
-    int ID;
-    string serieName;
-    string name;
-    string genre;
-    int duration;
-    double score;
-    string nameOfSerieChoosen;
-    int episodeNumber;
-    int season;
-
-
-    do {
-        //Read Line
-        f >> typeofMedia >> ID >> name >> genre >> duration >> score;
-        cout << textLine;
-        //If the media is an episode
-        if (typeofMedia == "e") {
-            Episodes *e = new Episodes(typeofMedia, ID, name, duration, genre, score, serieName, season, episodeNumber);
-            episodes.push_back(e);
-        }
-            //If the media is a movie
-        else {
-            Movie *p = new Movie(typeofMedia, ID, name, duration, genre, score);
-            movies.push_back(p);
-        }
-
-        //If the media is a movie
-    } while (!f.eof());
-    {
 
         vector<Episodes *> episodes_search;
         vector<Movie *> movie_search;
 
-        bool test3_1 = false;
-        int definer;
+        bool found = false;
+        int definer = 0;
+
+        // Search in episodes
         for (Episodes *episode: episodes) {
-
             if (episode->getName() == Sname) {
-                test3_1 = true;
-                definer=1;
-                episode->getScore();
+                found = true;
+                definer = 1;
+                episode->setScore(rate);
                 episodes_search.push_back(episode);
-
             }
         }
-        for (Movie *movie: movies){
+
+        // Search in movies
+        for (Movie *movie: movies) {
             if (movie->getName() == Sname) {
-                test3_1 = true;
-                ID=movie->getID();
-                genre=movie->getGenre();
-                duration=movie->getDuration();
-                definer=2;
-                movie->getScore();
+                found = true;
+                definer = 2;
+                movie->setScore(rate);
                 movie_search.push_back(movie);
-
             }
-
         }
 
         switch (definer) {
             case 1: {
-                Series serie(serieName, episodes_search);
-                cout << "Name of the Serie: " << serie.getName() << endl;
-                cout << "The score is: " << endl;
+                Series serie(name, episodes_search);
+                cout << "Name of the episode: " << Sname << endl;
+                cout << "The score is now: " << rate << endl;
                 serie.showEpisodes();
                 break;
             }
 
-            case 2:{
-                Movie Themovie("p",ID,serieName,duration, genre, score);
-                cout << "Name of the Movie: " << Themovie.getName() << endl;
-                cout << "The score is: "<< Themovie.getScore();
+            case 2: {
+                if (!movie_search.empty()) {
+                    Movie *Themovie = movie_search.front(); 
+                    cout << "Name of the Movie: " << Themovie->getName() << endl;
+                    cout << "The score is now: " << Themovie->getScore() << endl;
+                }
                 break;
             }
         }
-        if (!test3_1) {
-            cout << "Video not found"<< endl << endl;
+
+        if (!found) {
+            cout << "Video not found" << endl << endl;
+        }
+
+        for (Movie *movie: movies) {
+            delete movie;
+        }
+        for (Episodes *episode: episodes) {
+            delete episode;
         }
     }
-}
+
+void showrating(string loadedfile,string Sname) {
+        // Create the vectors to store the movies and episodes
+        vector<Movie *> movies;
+        vector<Episodes *> episodes;
+
+        // Open the file
+        ifstream f(loadedfile);
+        if (!f.is_open()) {
+            cout << "Error opening file!!!" << endl;
+            return;
+        }
+        string text_line;
+        getline(f, text_line);
+
+        string typeofMedia;
+        int ID;
+        string genre;
+        int duration;
+        double score;
+        string serieName;
+        string name;
+        int episodeNumber;
+        int season;
+
+        while (f >> typeofMedia >> ID >> name >> genre >> duration >> score) {
+
+            if (typeofMedia == "e") {
+                f >> serieName >> season >> episodeNumber;
+                Episodes *e = new Episodes(typeofMedia, ID, name, duration, genre, score, serieName, season,
+                                           episodeNumber);
+                episodes.push_back(e);
+            } else {
+                Movie *p = new Movie(typeofMedia, ID, name, duration, genre, score);
+                movies.push_back(p);
+            }
+        }
+
+        vector<Episodes *> episodes_search;
+        vector<Movie *> movie_search;
+
+        bool found = false;
+        int definer = 0;
+
+        // Search in episodes
+        for (Episodes *episode: episodes) {
+            if (episode->getName() == Sname) {
+                found = true;
+                definer = 1;
+                episodes_search.push_back(episode);
+            }
+        }
+
+        // Search in movies
+        for (Movie *movie: movies) {
+            if (movie->getName() == Sname) {
+                found = true;
+                definer = 2;
+                movie_search.push_back(movie);
+            }
+        }
+
+        switch (definer) {
+            case 1: {
+                Series serie(name, episodes_search);
+                cout << "Name of the episode: " << Sname << endl;
+                cout << "The score of this episode is:  " << serie.getScore() << endl;
+                serie.showEpisodes();
+                break;
+            }
+
+            case 2: {
+                if (!movie_search.empty()) {
+                    Movie *Themovie = movie_search.front(); // Assuming you want the first movie that matches
+                    cout << "Name of the Movie: " << Themovie->getName() << endl;
+                    cout << "The score of the movie is:  " << Themovie->getScore() << endl;
+                }
+                break;
+            }
+        }
+
+        if (!found) {
+            cout << "Video not found" << endl << endl;
+        }
+
+        // Clean up dynamically allocated memory
+        for (Movie *movie: movies) {
+            delete movie;
+        }
+        for (Episodes *episode: episodes) {
+            delete episode;
+        }
+    }
 
 
 
@@ -668,11 +664,9 @@ int main() {
                     break;
 
                 // CASE 5. Rate a Video or Ask For the Rating
-                case 5:
                 int des;
                 double calification;
-                cout << "Would you like to rate a video? (1)" << endl; 
-                cout<<"Would you like to view the rating of a video?(2)" << endl;
+                cout << "Would you like to rate a video (1) or view the rating of a video (2)" << endl;
                 try {
                     cin >> des;
                     if (des == 1) {
@@ -685,7 +679,7 @@ int main() {
                         exit(1);
                     } else if (des == 2) {
                         string interest;
-                        cout<<"Which video would you like to display its rating?"<<endl;
+                        cout<<"Which video would yuo like to display its rating?"<<endl;
                         cin>>interest;
                         showrating(loadedFile,interest);
 
